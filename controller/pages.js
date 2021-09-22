@@ -8,6 +8,13 @@ router.get('/',(req,res)=>{
     res.render('index');
 });
 
+router.get('/code-editor', (req, res) =>{
+    res.render('code-editor');
+});
+router.get('/contact-us', (req, res) =>{
+    res.render('contact-us');
+});
+
 
 
 module.exports = router;
