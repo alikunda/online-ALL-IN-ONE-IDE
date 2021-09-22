@@ -1,104 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>ALL-IN-ONE IDE</title>
-  <!-- MDB icon -->
-  <link rel="icon" href="img/header-logo.png" type="image/x-icon">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Google Fonts Roboto -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- Material Design Bootstrap -->
-  <link rel="stylesheet" href="css/mdb.min.css">
-  <!-- Your custom styles (optional) -->
-  <link rel="stylesheet" href="css/style.css">
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+    #editor { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>
 </head>
 <body>
-    <!--Navbar -->
 
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color fixed-top" style="background-image: linear-gradient(to right, rgb(128, 0, 0), maroon)">
-  
-    <a class="navbar-brand" href="/">ALL-IN-ONE IDE</a>
-    
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
-      aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/code-editor">
-            <i class="far fa-lightbulb"></i> Online IDE
-            <span class="sr-only"></span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fas fa-phone-square-alt"></i> Contact us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-question-circle"></i> Help</a>
-          </li>
-          
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <!--/.Navbar -->
- 
-  <div class="container"> 
-      <div class="row">
-        <style type="text/css" media="screen">
-            #editor { 
-                position: absolute;
-                top: 1in;
-                right: 0;
-                bottom: 0;
-                left: 0;
-            }
-        </style> 
-      <div class="col col-lg-2">function foo(items) {
+<div id="editor">function foo(items) {
     var x = "All this is syntax highlighted";
-    return x;}
-     </div>
-     
-   </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
+    return x;
+}</div>
+    
 <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/ext-language_tools.js"></script>
 <script>
+     var langTools = ace.require("ace/ext/language_tools");
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/dracula");
     editor.session.setMode("ace/mode/javascript");
+    editor.setOptions({
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: false
+});
 </script>
-
-  <!-- jQuery -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="js/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="js/mdb.min.js"></script>
-<!-- Your custom scripts (optional) -->
-<script type="text/javascript"></script>
 </body>
 </html>
