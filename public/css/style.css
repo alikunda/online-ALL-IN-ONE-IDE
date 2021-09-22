@@ -4,3 +4,7 @@
     color: black;
     text-shadow: mediumseagreen;
 }
+.editorContainer{
+    display: grid;
+    grid-template-columns: subgrid;
+}
