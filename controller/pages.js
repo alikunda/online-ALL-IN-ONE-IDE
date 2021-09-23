@@ -14,7 +14,9 @@ router.get('/code-editor', (req, res) =>{
 router.get('/contact-us', (req, res) =>{
     res.render('contact-us');
 });
-
+router.get('/help', (req, res) =>{
+    res.render('help');
+});
 
 
 module.exports = router;
