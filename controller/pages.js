@@ -17,6 +17,10 @@ router.get('/contact-us', (req, res) =>{
 router.get('/help', (req, res) =>{
     res.render('help');
 });
+router.post('/successfullySent', (req, res) =>{
+    res.render('successfullySent');
+});
+
 
 
 module.exports = router;
