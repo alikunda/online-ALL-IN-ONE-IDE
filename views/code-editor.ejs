@@ -30,9 +30,6 @@
 
 <!--/Dropdown primary-->
     </div>
-    <div class="col=sm-2">
-      <button type="button" class="btn btn-success btn-sm"><i class="fas fa-play"></i>&nbsp; Run</button>
-    </div>
     <div class="col=sm-3">
       <select class="btn btn-light btn-sm" name="Language" id="Language">
         <option selected disabled>Choose langauge</option>
@@ -43,6 +40,10 @@
         <option value="javascript">Javascript</option>
       </select>
     </div>
+    <div class="col=sm-2">
+      <button type="button" class="btn btn-success btn-sm"><i class="fas fa-play"></i>&nbsp; Run</button>
+    </div>
+   
 
   </div>
 </div>
@@ -92,7 +93,7 @@
             editor.setTheme("ace/theme/dracula");
             editor.session.setMode("ace/mode/java");
             ace.require("ace/ext/language_tools");
-            placeholder: "choose file to edit"
+         
 
             editor.setOptions({
             enableBasicAutocompletion: true,
