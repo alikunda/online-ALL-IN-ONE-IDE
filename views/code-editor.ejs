@@ -15,21 +15,13 @@
     <div class="col=sm-3">
       <button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle"></i>&nbsp; Add</button>
     </div>
-    <div class="col=sm-3">
+  
      <!--Dropdown primary-->
       <!--Trigger-->
-      <a class="btn btn-light btn-sm dropdown-toggle" ontype="button" id="dropdownMenu1" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false" style="color:black;">Themes </a>
+    
       <!--Menu-->
-      <div class="dropdown-menu dropdown-primary">
-        <button class="dropdown-item" value="dracula" onchange="myFunction(this.value)" >Dracula</button>
-        <button class="dropdown-item" value="twilight"onchange="myFunction(this.value)" >twilight</button>
-        <button class="dropdown-item" value="eclipse"onchange="myFunction(eclipse)" >Eclipse</button>
-        <button class="dropdown-item" value="monokai"onchange="myFunction(this.value)" >Monokai</button>
-</div>
 
-<!--/Dropdown primary-->
-    </div>
+
     <div class="col=sm-3">
       <select class="btn btn-light btn-sm" name="Language" id="mode" onchange="changeLanguage()">
         <option selected disabled>Choose langauge</option>
@@ -40,6 +32,19 @@
         <option id="javascript" value="javascript" selected>Javascript</option>
       </select>
     </div>
+
+    <div class="col=sm-">
+      <select class="btn btn-light btn-sm" name="Themes" id="themes" onchange="changeThemes()">
+        <option selected disabled>Choose themes</option>
+        <option id="twilight" value="twilight">Twilight</option>
+        <option  id="monokai"  value="monokai">Monokai</option>
+        <option  id="eclipse" value="eclipse">Eclipse</option>
+        <option id="dracula" value="dracula" selected>Dracula</option>
+        <option  id="ambiance" value="ambiance">Ambiance</option>
+        <option  id="chao" value="chaos">Chaos</option>
+      </select>
+    </div>
+
     <div class="col=sm-2">
       <button type="button" class="btn btn-success btn-sm"><i class="fas fa-play"></i>&nbsp; Run</button>
     </div>
@@ -84,12 +89,7 @@
     </div>
     </div>
 
-    <script>
-    var app = angular.module('myApp', []);
-    app.controller('myCtrl', function($scope) {
-      $scope.name = "John Doe";
-    });
-    </script>
+  
  <!------------------------------------------------------------Javascript----------------------------------------------------------------->
       <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/ext-language_tools.js"></script>
@@ -155,9 +155,35 @@
               $('.selectpicker').selectpicker();
               $('[data-toggle="tooltip"]').tooltip(); 
           });
-
-
-
+          /////////////////////////////////////////////////////////////////////////////////
+          //change the theme
+          function changeThemes() {
+              var x = document.getElementById("themes");
+              var modeValue = x.options[x.selectedIndex].value;
+              if (modeValue == "twilight") {
+                editor.setTheme("ace/theme/twilight");
+              }
+              if (modeValue == "monokai") {
+                editor.setTheme("ace/theme/monokai");
+              }
+              if(modeValue == "dracula") {
+                editor.setTheme("ace/theme/dracula");
+ 
+              }
+              if (modeValue == "eclipse") {
+                editor.setTheme("ace/theme/eclipse");
+              }  
+              if (modeValue == "ambiance") {
+                editor.setTheme("ace/theme/ambiance");
+              } 
+              if (modeValue == "chaos") {
+                editor.setTheme("ace/theme/chaos");
+              } 
+          }
+          $(document).ready(function() {
+              $('.selectpicker').selectpicker();
+              $('[data-toggle="tooltip"]').tooltip(); 
+          });
 
         runCode.addEventListener('click', ()=>{
         const userCode = editor.getValue();  //get the code from user
@@ -187,6 +213,7 @@
           +"\n          var x" +"= "+"All this is syntax highlighted"+";"
           +"\n          return x;");
         })
+
         function myFunction(val) {
           if(val === 'dracula'){
             editor.setTheme("ace/theme/dracula");
