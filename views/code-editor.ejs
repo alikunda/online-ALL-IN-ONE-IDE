@@ -1,235 +1,92 @@
 <%- include('layouts/header.ejs') %>
-<%- include('layouts/navigation.ejs') %>
+  <%- include('layouts/navigation.ejs') %>
+    <!--Menu bar of the code editor containing functions like open, save, home, select the language, run-->
+    <div class="container-xxl" style="background-color: rgb(68, 68, 68); border-bottom: limegreen 3px solid;">
+      <div class="row" style="margin-left: 10px">
+        <div class="col=sm-3" id="editnav">
+          <input type="file" class="open " id="openbtn" value="Open">
+          <button type="submit" class="btn btn-light btn-sm" id="download" name="download"
+            value="download">Download</button>
 
-<!--calling Angualar API-->
+        </div>
+        <div class="col=sm-3">
 
-<!--Menu bar of the code editor containing functions like open, save, home, select the language, run-->
-<div class="container-xxl"  style="background-color: rgb(68, 68, 68); border-bottom: limegreen 3px solid;">
-  <div class="row" style="margin-left: 10px" >
-    <div class="col=sm-3"id="editnav">
-      <input type="file"class=" btn-sm"  id="openbtn" onchange="openCode(this.files)" value="Open">
-      <input type="button"  class="btn btn-light btn-sm" id="downloadbtn" onclick="downloadHTML()" value="Save">
-      <input type="button"  class="btn btn-light btn-sm" id="homebtn2" onclick="window.location.href = '/code-editor';" value="Home">
-  </div>
-   
-    <div class="col=sm-3">
-      <button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle"></i>&nbsp; Add</button>
+          <button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle"></i>&nbsp; Add</button>
+        </div>
+
+        <div class="col=sm-3">
+          <select class="languages btn btn-light btn-sm" name="Language" id="mode" onchange="changeLanguage()">
+            <option selected disabled>Choose langauge</option>
+            <option id="java" value="java">Java</option>
+            <option id="python" value="python">Python</option>
+            <option id="c++" value="c++">C++</option>
+            <option id="c" value="c">C</option>
+            <option id="Swift" value="Swift">Swift</option>
+          </select>
+        </div>
+
+        <div class="col=sm-">
+          <select class="btn btn-light btn-sm" name="Themes" id="themes" onchange="changeThemes()">
+            <option selected disabled>Choose themes</option>
+            <option id="twilight" value="twilight">Twilight</option>
+            <option id="monokai" value="monokai">Monokai</option>
+            <option id="eclipse" value="eclipse">Eclipse</option>
+            <option id="dracula" value="dracula" selected>Dracula</option>
+            <option id="ambiance" value="ambiance">Ambiance</option>
+            <option id="chao" value="chaos">Chaos</option>
+          </select>
+        </div>
+
+        <div class="col=sm-2">
+          <input type="button" class="btn btn-light btn-sm" id="homebtn2"
+            onclick="window.location.href = '/code-editor';" value="Reset">
+          <button type="button" class="btn btn-success btn-sm" onclick="executeCode()"><i class="fas fa-play"></i>&nbsp;
+            Run</button>
+        </div>
+      </div>
     </div>
-  
-     <!--Dropdown primary-->
-      <!--Trigger-->
-    
-      <!--Menu-->
 
 
-    <div class="col=sm-3">
-      <select class="btn btn-light btn-sm" name="Language" id="mode" onchange="changeLanguage()">
-        <option selected disabled>Choose langauge</option>
-        <option id="java" value="java">Java</option>
-        <option id="python" value="python">Python</option>
-        <option  id="c++"  value="c++">C++</option>
-        <option  id="c" value="c">C</option>
-        <option id="javascript" value="javascript" selected>Javascript</option>
-      </select>
-    </div>
-
-    <div class="col=sm-">
-      <select class="btn btn-light btn-sm" name="Themes" id="themes" onchange="changeThemes()">
-        <option selected disabled>Choose themes</option>
-        <option id="twilight" value="twilight">Twilight</option>
-        <option  id="monokai"  value="monokai">Monokai</option>
-        <option  id="eclipse" value="eclipse">Eclipse</option>
-        <option id="dracula" value="dracula" selected>Dracula</option>
-        <option  id="ambiance" value="ambiance">Ambiance</option>
-        <option  id="chao" value="chaos">Chaos</option>
-      </select>
-    </div>
-
-    <div class="col=sm-2">
-      <button type="button" class="btn btn-success btn-sm"><i class="fas fa-play"></i>&nbsp; Run</button>
-    </div>
-  </div>
-</div>
-
-
-<!--Editor from ace Editor-->
-      <script src="http://ajaxorg.github.io/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
-      <script src="http://ajaxorg.github.io/ace-builds/src/ext-modelist.js" type="text/javascript" charset="utf-8"></script>
-     <div class="container-xxl" style="background-color:papayawhip; padding-bottom: 2rem;">
-      <div class="row" >
-        <div class="col msg"  style="height:33.1rem;  margin-left: 5rem; display:inline-block;
+    <!--Editor from ace Editor-->
+    <script src="http://ajaxorg.github.io/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://ajaxorg.github.io/ace-builds/src/ext-modelist.js" type="text/javascript"
+      charset="utf-8"></script>
+    <div class="container-xxl" style="background-color:papayawhip; padding-bottom: 2rem;">
+      <div class="row">
+        <div class="col msg" style="height:33.1rem;   margin-left: 5rem; display:inline-block;
         padding:0px;
-        margin-left:-4px;" id="editor">function foo(items) {
-          var x = "All this is syntax highlighted";
-          return x;
+        margin-left:-4px;" id="editor">//Select the programming language first!!!
+        </div>
+      </div>
+
+
+      <div class="container-xxl">
+        <div class="row">
+          <div class="col-xl">
+            <textarea placeholder="Input" id="input" class="form-control rounded-0" id="exampleFormControlTextarea3"
+              rows="10"
+              style="width: 104.45%;border:rgb(224, 30, 30) 3px solid; background-color: black; color: yellow;"></textarea>
           </div>
-       </div>
-            <div  class="container-xxl" style="background-color: grey;">
-              <div class="row-md" >
-                <div ng-app="myApp" ng-controller="myCtrl" class="col-md">
-                  <p class="numlines" ng-model="numLines" id=numlines style="text-align: center; color: black;">Number of Lines</p>
-                  </div>  
-                  </div>                  
-            </div>
-          <div class="container-xl" style="padding-top: 1.5rem;">
-          <div class="row">
-            <div class="col-md" >
-              <textarea  placeholder="Input"class="form-control rounded-0" id="exampleFormControlTextarea3"  rows="10" style="width: 98.2%;border:black 1px solid"></textarea>
-            </div>
-            <div class="col-md" >
-              <textarea readonly placeholder="Output"class="form-control rounded-0" id="exampleFormControlTextarea3"  rows="10" style="width: 98.2%; border:black 1px solid"></textarea>
-            </div>
+          <div class="col-lg">
+            <textarea readonly placeholder="Output" id="output" class="form-control rounded-0"
+              id="exampleFormControlTextarea3" rows="10"
+              style="width: 100%; border:rgb(6, 247, 6) 3px solid;color:chartreuse; background-color: rgb(34, 34, 34);"></textarea>
           </div>
         </div>
+      </div>
     </div>
-  <div class="container-xxl d-flex justify-content-center"style="background-color:papayawhip; padding-bottom: 4rem;">
-    <div class="row">
-      <button type="button" class="reset btn btn-light">reset</button>
-      <button type="button" class="run btn btn-success ">Execute</button>
+    <div class="container-xxl d-flex justify-content-center" style="background-color:papayawhip; padding-bottom: 4rem;">
+      <div class="row">
+
+        <button type="button" id="execute" onclick="executeCode()" class="run btn btn-success ">Execute</button>
+      </div>
     </div>
-    </div>
-
-  
- <!------------------------------------------------------------Javascript----------------------------------------------------------------->
-      <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
-      <script src="js/ext-language_tools.js"></script>
-
-        <script>
-        const runCode = document.querySelector('.run');
-        const resetCode = document.querySelector('.reset');
-      
-         var editor = ace.edit("editor");
-
-         editor.setTheme("ace/theme/dracula");
-         editor.session.setMode("ace/mode/javascript");
-         ace.require("ace/ext/language_tools");
-         
-
-            editor.setOptions({
-            enableBasicAutocompletion: true,
-            enableSnippets: true,
-            enableLiveAutocompletion: true
-        });  
 
 
-        editor.clearSelection();
-
-          // Function to change the mode of the editor as a different language is selected dynamically
-          function changeLanguage() {
-              var x = document.getElementById("mode");
-              var modeValue = x.options[x.selectedIndex].value;
-              if (modeValue == "c") {
-                editor.session.setMode("ace/mode/c_cpp");
-                editor.setValue("#include <stdio.h>\n\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
-                  editor.clearSelection();
-                  document.getElementById('langExt').innerHTML = "c";
-              }
-              if (modeValue == "c++") {
-                editor.session.setMode("ace/mode/c_cpp");
-                editor.setValue("#include <iostream>\nusing namespace std;\n\nint main() {\n    // Complete the code.\n    return 0;\n}\n");
-                  editor.clearSelection();
-                  document.getElementById('langExt').innerHTML = "cpp";
-              }
-              if(modeValue == "python") {
-                  editor.session.setMode("ace/mode/python");
-                  editor.setValue("print(hello world)");
-                  editor.clearSelection();
-                  document.getElementById('langExt').innerHTML = "py";
-              }
-              if (modeValue == "java") {
-                editor.session.setMode("ace/mode/java");
-                editor.setValue("import java.io.*;\n\nclass Main {\n\n    public static void main(String[] args) {\n        // Your code goes here\n   }\n}\n");
-                  editor.clearSelection();
-                  document.getElementById('langExt').innerHTML = "java";
-              }  if (modeValue == "javascript") {
-                editor.session.setMode("ace/mode/java");
-                editor.setValue(" function foo(items) {"
-          +"\n          var x" +"= "+"All this is syntax highlighted"+";"
-          +"\n          return x;");
- 
-                  editor.clearSelection();
-                  document.getElementById('langExt').innerHTML = "java";
-              }
-          }
-          $(document).ready(function() {
-              $('.selectpicker').selectpicker();
-              $('[data-toggle="tooltip"]').tooltip(); 
-          });
-          /////////////////////////////////////////////////////////////////////////////////
-          //change the theme
-          function changeThemes() {
-              var x = document.getElementById("themes");
-              var modeValue = x.options[x.selectedIndex].value;
-              if (modeValue == "twilight") {
-                editor.setTheme("ace/theme/twilight");
-              }
-              if (modeValue == "monokai") {
-                editor.setTheme("ace/theme/monokai");
-              }
-              if(modeValue == "dracula") {
-                editor.setTheme("ace/theme/dracula");
- 
-              }
-              if (modeValue == "eclipse") {
-                editor.setTheme("ace/theme/eclipse");
-              }  
-              if (modeValue == "ambiance") {
-                editor.setTheme("ace/theme/ambiance");
-              } 
-              if (modeValue == "chaos") {
-                editor.setTheme("ace/theme/chaos");
-              } 
-          }
-          $(document).ready(function() {
-              $('.selectpicker').selectpicker();
-              $('[data-toggle="tooltip"]').tooltip(); 
-          });
-
-        runCode.addEventListener('click', ()=>{
-        const userCode = editor.getValue();  //get the code from user
-            try{
-              var run = new Function(userCode)();
-              
-            }catch{
-                console.error(err);
-            }
-        });
-/* -------------------------------------OPEN FILE-----------------------------------------*/
-        function openCode(files) {
-                var file = files[0]
-                if (!file) return;
-                var modelist = ace.require("ace/ext/modelist")
-                var modeName = modelist.getModeForPath(file.name).mode 
-                editor.session.setMode(modeName)
-                reader = new FileReader();
-                reader.onload = function() {
-                    editor.session.setValue(reader.result)
-                }  
-                reader.readAsText(file) 
-            }
-        document.getElementById('editor').style.fontSize='14px';
-        resetCode.addEventListener("click", ()=>{
-            editor.setValue(" function foo(items) {"
-          +"\n          var x" +"= "+"All this is syntax highlighted"+";"
-          +"\n          return x;");
-        })
-
-        function myFunction(val) {
-          if(val === 'dracula'){
-            editor.setTheme("ace/theme/dracula");
-          }
-          else  if(val === 'twilight'){
-            editor.setTheme("ace/theme/twilight");
-          }
-          else  if(val === 'eclipse'){
-            editor.setTheme("ace/theme/eclipse");
-          }
-          else  if(val =='monokai'){
-            editor.setTheme("ace/theme/monokai");
-          }
-        }
-        editor.setShowPrintMargin(true);
-  
-        </script>
-<%- include('layouts/footer.ejs') %>
-        
+    <!------------------------------------------------------------Javascript----------------------------------------------------------------->
+    <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/ext-language_tools.js"></script>
+    <script src="src/FileSaver.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="js/index.js"></script>
+    <%- include('layouts/footer.ejs') %>
