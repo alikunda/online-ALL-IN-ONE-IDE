@@ -4,15 +4,12 @@
     <div class="container-xxl" style="background-color: rgb(68, 68, 68); border-bottom: limegreen 3px solid;">
       <div class="row" style="margin-left: 10px">
         <div class="col=sm-3" id="editnav">
-          <input type="file" class="open " id="openbtn" value="Open">
-          <button type="submit" class="btn btn-light btn-sm" id="download" name="download"
+          <input type="file" class="open " onClick="openCode()" id="openbtn" value="Open">
+          <button type="submit" class="btn btn-light btn-sm" onClick="saveText()" id="download" name="download"
             value="download">Download</button>
 
         </div>
-        <div class="col=sm-3">
-
-          <button type="button" class="btn btn-light btn-sm"><i class="fas fa-plus-circle"></i>&nbsp; Add</button>
-        </div>
+    
 
         <div class="col=sm-3">
           <select class="languages btn btn-light btn-sm" name="Language" id="mode" onchange="changeLanguage()">
@@ -65,7 +62,7 @@
           <div class="col-xl">
             <textarea placeholder="Input" id="input" class="form-control rounded-0" id="exampleFormControlTextarea3"
               rows="10"
-              style="width: 104.45%;border:rgb(224, 30, 30) 3px solid; background-color: black; color: yellow;"></textarea>
+              style="width: 104.45%;border:rgb(224, 30, 30) 3px solid; background-color: black; color: yellow; "></textarea>
           </div>
           <div class="col-lg">
             <textarea readonly placeholder="Output" id="output" class="form-control rounded-0"

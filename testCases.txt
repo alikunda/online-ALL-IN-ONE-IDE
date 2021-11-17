@@ -1,0 +1,125 @@
+Java
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) {
+      Scanner scan = new Scanner(System.in);
+     ;
+    int day = scan.nextInt();
+    switch (day) {
+      case 1:
+        System.out.println("Monday");
+        break;
+      case 2:
+        System.out.println("Tuesday");
+        break;
+      case 3:
+        System.out.println("Wednesday");
+        break;
+      case 4:
+        System.out.println("Thursday");
+        break;
+      case 5:
+        System.out.println("Friday");
+        break;
+      case 6:
+        System.out.println("Saturday");
+        break;
+      case 7:
+        System.out.println("Sunday");
+        break;
+    }
+  }
+}
+
+Python
+num =int(input())
+
+# To take input from the user
+#num = int(input("Enter a number: "))
+
+# define a flag variable
+flag = False
+
+# prime numbers are greater than 1
+if num > 1:
+    # check for factors
+    for i in range(2, num):
+        if (num % i) == 0:
+            # if factor is found, set flag to True
+            flag = True
+            # break out of loop
+            break
+
+# check if flag is True
+if flag:
+    print(num, "is not a prime number")
+else:
+    print(num, "is a prime number")
+
+C++
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int rows;
+
+    cout << "Enter number of rows: ";
+    cin >> rows;
+
+    for(int i = 1; i <= rows; ++i)
+    {
+        for(int j = 1; j <= i; ++j)
+        {
+            cout << "*";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+
+c:
+// SD of a population
+#include <math.h>
+#include <stdio.h>
+float calculateSD(float data[]);
+int main() {
+    int i;
+    float data[10];
+    printf("Enter 10 elements: ");
+    for (i = 0; i < 10; ++i)
+        scanf("%f", &data[i]);
+    printf("\nStandard Deviation = %.6f", calculateSD(data));
+    return 0;
+}
+
+float calculateSD(float data[]) {
+    float sum = 0.0, mean, SD = 0.0;
+    int i;
+    for (i = 0; i < 10; ++i) {
+        sum += data[i];
+    }
+    mean = sum / 10;
+    for (i = 0; i < 10; ++i) {
+        SD += pow(data[i] - mean, 2);
+    }
+    return sqrt(SD / 10);
+}
+Swift:
+// define a class
+class Bicycle {
+
+// define two properties
+var name = ""
+var gears = 0
+}
+
+// create instance of Person
+var bike1 = Bicycle()
+
+// access properties and assign new values
+bike1.gears = 11
+bike1.name = "Mountain Bike"
+
+print("Name: \(bike1.name), Gears: \( bike1.gears) ")

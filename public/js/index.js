@@ -79,6 +79,7 @@ function executeCode() {
 // Function to change the mode of the editor as a different language is selected dynamically
 function changeLanguage() {
   var x = document.getElementById("mode");
+ 
   var modeValue = x.options[x.selectedIndex].value;
   if (modeValue == "c") {
     editor.session.setMode("ace/mode/c_cpp");
@@ -86,6 +87,8 @@ function changeLanguage() {
     editor.clearSelection();
     document.getElementById('langExt').innerHTML = "c";
     console.log("C");
+  
+    
   }
   if (modeValue == "c++") {
     editor.session.setMode("ace/mode/c_cpp");
@@ -100,6 +103,7 @@ function changeLanguage() {
     editor.clearSelection();
     document.getElementById('langExt').innerHTML = "py";
     console.log("python");
+
   }
   if (modeValue == "java") {
     editor.session.setMode("ace/mode/java");
@@ -107,13 +111,16 @@ function changeLanguage() {
     editor.clearSelection();
     document.getElementById('langExt').innerHTML = "java";
     console.log("Java");
-  } if (modeValue == "Swift") {
+
+  }
+   if (modeValue == "Swift") {
     editor.session.setMode("ace/mode/swift");
     editor.setValue('var myString = "Hello, World!";' 
     +'\nprint(myString)');
 
     editor.clearSelection();
     document.getElementById('langExt').innerHTML = "swift";
+
   }
 }
 $(document).ready(function () {
@@ -123,7 +130,7 @@ $(document).ready(function () {
 let count = 1;
 
 const open = docuemnt.querySelector(".open");
-open.addEventListener("click",
+open.addEventListener("click",(e) =>
   function openCode(files) {
     var file = files[0]
     if (!file) return;
@@ -138,20 +145,24 @@ open.addEventListener("click",
   });
 function elemTarget(e) {
   e = e || window.event;
+  console.log("testing...");
   e.preventDefault();
   return e.target;
 }
 
-document.addEventListener("click", function (e) {
-  let elem = elemTarget(e);
-
-  if (elem.id == 'download') {
-    saveText();
-  }
-});
+// document.addEventListener("click", (e) => {
+//   let elem = elemTarget(e);
+//  
+//   if (elem.id == 'download') {
+  
+//     saveText();
+    
+//   }
+// });
 
 function saveText() {
   let data = editor.getValue();
+  console.log("saveText()");
   if (modeHolder != "java" && modeHolder != "py" && modeHolder != "cpp" && modeHolder != "c" && modeHolder != "javascript") {
     console.log('No language selected')
   }
