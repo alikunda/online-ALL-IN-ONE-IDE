@@ -4,7 +4,7 @@
     <div class="container-xxl" style="background-color: rgb(68, 68, 68); border-bottom: limegreen 3px solid;">
       <div class="row" style="margin-left: 10px">
         <div class="col=sm-3" id="editnav">
-          <input type="file" class="open " onClick="openCode()" id="openbtn" value="Open">
+          <input type="file" class="open" onChange="openCode(this.files)" id="openbtn" value="Open">
           <button type="submit" class="btn btn-light btn-sm" onClick="saveText()" id="download" name="download"
             value="download">Download</button>
 

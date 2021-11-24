@@ -129,20 +129,7 @@ $(document).ready(function () {
 });
 let count = 1;
 
-const open = docuemnt.querySelector(".open");
-open.addEventListener("click",(e) =>
-  function openCode(files) {
-    var file = files[0]
-    if (!file) return;
-    var modelist = ace.require("ace/ext/modelist")
-    var modeName = modelist.getModeForPath(file.name).mode
-    editor.session.setMode(modeName)
-    reader = new FileReader();
-    reader.onload = function () {
-      editor.session.setValue(reader.result)
-    }
-    reader.readAsText(file)
-  });
+
 function elemTarget(e) {
   e = e || window.event;
   console.log("testing...");
@@ -163,7 +150,7 @@ function elemTarget(e) {
 function saveText() {
   let data = editor.getValue();
   console.log("saveText()");
-  if (modeHolder != "java" && modeHolder != "py" && modeHolder != "cpp" && modeHolder != "c" && modeHolder != "javascript") {
+  if (modeHolder != "java" && modeHolder != "py" && modeHolder != "cpp" && modeHolder != "c" && modeHolder != "swift") {
     console.log('No language selected')
   }
   else {
@@ -181,6 +168,20 @@ function saveText() {
     URL.revokeObjectURL(link.href);
   }
 }
+
+function openCode(files) {
+  var file = files[0]
+  if (!file) return;
+  var modelist = ace.require("ace/ext/modelist")
+  var modeName = modelist.getModeForPath(file.name).mode 
+  editor.session.setMode(modeName)
+  reader = new FileReader();
+  reader.onload = function() {
+      editor.session.setValue(reader.result)
+  }  
+  reader.readAsText(file) 
+}
+
 
 //change the theme
 function changeThemes() {
